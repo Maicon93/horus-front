@@ -38,10 +38,16 @@
                     ></v-list-item>
                   </template>
 
-                  <v-list-item class="hover:bg-gray-200" v-for="(othersMenu, y) in submenu.menus" :key="y" :title="othersMenu.title"></v-list-item>
+                  <v-list-item
+                    class="hover:bg-gray-200"
+                    v-for="(othersMenu, y) in submenu.menus"
+                    :key="y"
+                    :title="othersMenu.title"
+                    :to="othersMenu.url"
+                  />
                 </v-list-group>
 
-                <v-list-item class="hover:bg-gray-200"  v-else density="compact" :title="submenu.title"></v-list-item>
+                <v-list-item class="hover:bg-gray-200"  v-else density="compact" :to="submenu.url" :title="submenu.title"></v-list-item>
               </v-list>
             </v-list-group>
           </v-list>
@@ -79,10 +85,16 @@
                   ></v-list-item>
                 </template>
 
-                <v-list-item class="hover:bg-gray-200" v-for="(othersMenu, y) in submenu.menus" :key="y" :title="othersMenu.title"></v-list-item>
+                <v-list-item
+                  class="hover:bg-gray-200"
+                  v-for="(othersMenu, y) in submenu.menus"
+                  :key="y"
+                  :title="othersMenu.title"
+                  :to="othersMenu.url"
+                />
               </v-list-group>
 
-              <v-list-item class="hover:bg-gray-200" v-else density="compact" :title="submenu.title"></v-list-item>
+              <v-list-item class="hover:bg-gray-200" v-else density="compact" :to="submenu.url" :title="submenu.title"></v-list-item>
             </v-list>
           </v-menu>
         </div>
@@ -123,50 +135,50 @@
             {
               title: 'Graduação',
               menus: [
-                { title: 'Administração'},
-                { title: 'Ciências Contábeis'},
-                { title: 'Direito'},
-                { title: 'Educação Física Bacharelado'},
-                { title: 'Educação Física Licenciatura'},
-                { title: 'Engenharia Civil'},
-                { title: 'Pedagogia'},
-                { title: 'Sistemas de Informação'},
+                { title: 'Administração', url: '/' },
+                { title: 'Ciências Contábeis', url: '/' },
+                { title: 'Direito', url: '/' },
+                { title: 'Educação Física Bacharelado', url: '/' },
+                { title: 'Educação Física Licenciatura', url: '/' },
+                { title: 'Engenharia Civil', url: '/' },
+                { title: 'Pedagogia', url: '/' },
+                { title: 'Sistemas de Informação', url: '/' },
               ]
             },
             {
               title: 'Pós Graduação',
               menus: [
-                { title: 'Gestão de Cooperativas', url: '' },
-                { title: 'Gestão Estratégica de Varejo', url: '' },
-                { title: 'Controladoria Auditoria e Finanças', url: '' },
-                { title: 'Gestão de Pessoas', url: '' },
-                { title: 'Neuropsicopedagogia', url: '' },
-                { title: 'Anos Iniciais e Educação Infantil', url: '' },
+                { title: 'Gestão de Cooperativas', url: '/' },
+                { title: 'Gestão Estratégica de Varejo', url: '/' },
+                { title: 'Controladoria Auditoria e Finanças', url: '/' },
+                { title: 'Gestão de Pessoas', url: '/' },
+                { title: 'Neuropsicopedagogia', url: '/' },
+                { title: 'Anos Iniciais e Educação Infantil', url: '/' },
               ]
             },
             {
               title: 'Extensão',
               menus: [
-                { title: 'Modelagem 3D com Sketchup', url: '' },
+                { title: 'Modelagem 3D com Sketchup', url: '/' },
               ]
             },
           ]
         },
         {
           title: 'Seletivo 2024',
-          url: ''
+          url: '/'
         },
         {
           title: 'Artigos',
           submenus: [
-            { title: 'Administração', url: '' },
-            { title: 'Sistemas de Informação', url: '' },
-            { title: 'Direito', url: '' },
-            { title: 'Ciências Contábeis', url: '' },
-            { title: 'Pedagogia', url: '' },
-            { title: 'Educação Física', url: '' },
-            { title: 'Dança', url: '' },
-            { title: 'Engenharia Civil', url: '' },
+            { title: 'Administração', url: '/' },
+            { title: 'Sistemas de Informação', url: '/' },
+            { title: 'Direito', url: '/' },
+            { title: 'Ciências Contábeis', url: '/' },
+            { title: 'Pedagogia', url: '/' },
+            { title: 'Educação Física', url: '/' },
+            { title: 'Dança', url: '/' },
+            { title: 'Engenharia Civil', url: '/' },
           ]
         },
         {
@@ -175,25 +187,25 @@
             {
               title: 'Instituição',
               menus: [
-                { title: 'Conheça a Horus', url: '' },
-                { title: 'Instituto Horus', url: '' },
-                { title: 'Ouvidoria', url: '' },
-                { title: 'Laboratórios', url: '' },
-                { title: 'Notícias', url: '' },
-                { title: 'CPA', url: '' },
+                { title: 'Conheça a Horus', url: 'conheca-a-horus' },
+                { title: 'Instituto Horus', url: '/' },
+                { title: 'Ouvidoria', url: '/' },
+                { title: 'Laboratórios', url: '/' },
+                { title: 'Notícias', url: '/' },
+                { title: 'CPA', url: '/' },
               ]
             },
             {
               title: 'Acadêmico',
               menus: [
-                { title: 'Academico Horus', url: '' },
-                { title: 'Bolsas de Estudo', url: '' },
-                { title: 'Biblioteca', url: '' },
-                { title: 'Balcão de Empregos', url: '' },
-                { title: 'Bolsas de Estudo', url: '' },
-                { title: 'Periódicos', url: '' },
-                { title: 'Revista Alvorada', url: '' },
-                { title: 'SAE', url: '' },
+                { title: 'Academico Horus', url: '/' },
+                { title: 'Bolsas de Estudo', url: '/' },
+                { title: 'Biblioteca', url: '/' },
+                { title: 'Balcão de Empregos', url: '/' },
+                { title: 'Bolsas de Estudo', url: '/' },
+                { title: 'Periódicos', url: '/' },
+                { title: 'Revista Alvorada', url: '/' },
+                { title: 'SAE', url: '/' },
               ]
             },
           ]
@@ -201,8 +213,8 @@
         {
           title: 'Plataformas',
           submenus: [
-            { title: 'Unimestre', url: '' },
-            { title: 'Plataforma Horus', url: '' },
+            { title: 'Unimestre', url: '/' },
+            { title: 'Plataforma Horus', url: '/' },
           ]
         },
       ],

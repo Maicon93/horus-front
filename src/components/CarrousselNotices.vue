@@ -1,14 +1,19 @@
 <template>
-  <v-carousel class="bg-black p-10">
-    <v-carousel-item>
-      <div class="flex justify-between items-center space-x-4 mx-20">
-        <div v-for="(item, index) in items" :key="index" class="w-[350px] h-[500px]">
-          <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full">
-            <img :src="item.image" alt="Image" class="w-full h-1/2 object-cover">
-            <div class="p-6 h-1/2">
-              <h3 class="text-sm font-semibold truncate">{{ item.title }}</h3>
-              <p class="text-gray-500 text-xs">{{ item.date }}</p>
-              <p class="text-gray-700 text-xs mt-1 truncate">{{ item.description }}</p>
+  <v-carousel hide-delimiters v-if="pages.length > 0" class="bg-black p-10 lg:p-28 xl:px-38">
+    <v-carousel-item v-for="(page, pageIndex) in pages" :key="pageIndex">
+      <div class="flex justify-around items-center space-x-4">
+        <div v-for="(item, index) in page" :key="index" class="w-[350px] h-[390px] pb-5">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden h-full" @click="openNotice(item)">
+            <img :src="item.image_url" alt="Image" class="w-full h-2/5 object-cover">
+            <div class="m-2 h-3/5 flex flex-col">
+              <h3 class="text-sm font-semibold">{{ item.title }}</h3>
+              <p class="text-gray-500 text-xs">{{ item.created_date }}</p>
+              <p class="pt-4 text-gray-700 text-xs mt-1 flex-grow overflow-auto">{{ item.preview }}</p>
+              <div class="flex justify-center p-4">
+                <v-btn density="compact" rounded color="black">
+                  <span class="text-xs tracking-wide text-white">Ver mais</span>
+                </v-btn>
+              </div>
             </div>
           </div>
         </div>
@@ -17,35 +22,46 @@
   </v-carousel>
 </template>
 
+
 <script>
   export default {
     data: () => ({
-      items: [
-        {
-          image: 'https://static.wixstatic.com/media/d2be83_b605b78313ce44fa9b076bd3cecd0049~mv2.png/v1/crop/x_41,y_0,w_2841,h_1772/fill/w_1029,h_642,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/_Not%C3%ADcias%20%20.png',
-          title: 'EDF : Workshop sobre ciclismo',
-          date: '17 de abril de 2023',
-          description: 'Na noite de ontem, dia 01/04, a turma da 1ª fase de Educação Física...'
-        },
-        {
-          image: 'https://static.wixstatic.com/media/d2be83_b605b78313ce44fa9b076bd3cecd0049~mv2.png/v1/crop/x_41,y_0,w_2841,h_1772/fill/w_1029,h_642,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/_Not%C3%ADcias%20%20.png',
-          title: 'Alunos do curso de Pedagogia exploram a Trilha do Saber',
-          date: '17 de abril de 2023',
-          description: 'Na noite de ontem, dia 01/04, a turma da 1ª fase de Educação Física...'
-        },
-        {
-          image: 'https://static.wixstatic.com/media/d2be83_b605b78313ce44fa9b076bd3cecd0049~mv2.png/v1/crop/x_41,y_0,w_2841,h_1772/fill/w_1029,h_642,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/_Not%C3%ADcias%20%20.png',
-          title: '28ª Maratona de Programação',
-          date: '17 de abril de 2023',
-          description: 'Neste final de semana, a Horus Faculdades representada pelo Professor...'
-        },
-        {
-          image: 'https://static.wixstatic.com/media/d2be83_b605b78313ce44fa9b076bd3cecd0049~mv2.png/v1/crop/x_41,y_0,w_2841,h_1772/fill/w_1029,h_642,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/_Not%C3%ADcias%20%20.png',
-          title: '28ª Maratona de Programação',
-          date: '17 de abril de 2023',
-          description: 'Neste final de semana, a Horus Faculdades representada pelo Professor...'
-        }
-      ]
+      pages: [],
     }),
+
+    methods: {
+      openNotice(item) {
+        console.log(item)
+      },
+
+      async getNotices() {
+        try {
+          const response = await this.$http.get('/institution/get-all-notices');
+          return response.body;
+        } catch (error) {
+          return [];
+        }
+      },
+
+      async getPages() {
+        const sizeWidth = this.$calculateSizeWidth()
+        let itemsPerPage = 3
+
+        const notices = await this.getNotices();
+        ['xxs', 'xs', 'sm', 'md'].includes(sizeWidth) && (itemsPerPage = 1);
+        sizeWidth === 'lg' && (itemsPerPage = 2);
+
+        const pages = [];
+        for (let i = 0; i < notices.length; i += itemsPerPage) {
+          pages.push(notices.slice(i, i + itemsPerPage))
+        }
+
+        return pages
+      },
+    },
+
+    async mounted() {
+      this.pages = await this.getPages()
+    },
   }
 </script>

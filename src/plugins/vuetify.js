@@ -10,8 +10,24 @@ export default createVuetify({
   icons: {
     defaultSet: 'mdi',
   },
-  variables: {
-    fontFamily: 'Lexend, sans-serif',
-    fontWeight: '400',
+  theme: {
+    themes: {
+      myCustomTheme: {
+        dark: false,
+        colors: {
+          primary: '#f57e16',
+          secondary: '#168bf5',
+          accent: '#82B1FF',
+          error: '#FF5252',
+          info: '#2196F3',
+          success: '#4CAF50',
+          warning: '#FB8C00',
+        },
+        variables: {
+          fontFamily: 'Lexend, sans-serif',
+          fontWeight: '400',
+        },
+      },
+    },
   },
 })
