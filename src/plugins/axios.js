@@ -39,7 +39,6 @@ export default {
       }
     )
 
-    // Registrar a instância do axios como $http
     app.config.globalProperties.$http = axiosInstance
     app.provide('http', axiosInstance)
   },

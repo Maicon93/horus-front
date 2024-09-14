@@ -34,15 +34,18 @@ export default {
   data() {
     return {
       form: {
-        email: 'admin_horus@gmail.com',
+        email: 'admin@gmail.com',
         password: '123',
       },
     };
   },
+
   methods: {
     async login() {
-      const response = await this.$http.post('/admin/login', this.form);
-      console.log(response)
+      await this.$http.post('/admin/login', this.form).then(resp => {
+        localStorage.setItem('sessionHash', resp.body.sessionHash)
+        this.$router.push('/admin-config');
+      })
     },
   },
 };

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import axios from 'axios'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,22 +24,30 @@ const router = createRouter({
   ]
 })
 
-// Função que verifica se o usuário está autenticado (pode ser ajustada de acordo com sua lógica)
-function isAuthenticated() {
-  // Exemplo: Verifica se existe um token de autenticação
-  return !!localStorage.getItem('authToken');
+async function isAuthenticated() {
+  const token = localStorage.getItem('sessionHash')
+  if (!token) {
+    return false
+  }
+
+  const baseUrl = `${window.location.protocol}//${window.location.hostname}`
+
+  let auth = false
+  await axios.post(`${baseUrl}:3000/admin/auth`, { token: token }).then(resp => {
+    resp.data.type == 'success' && (auth = true);
+  }).catch(()=>{})
+
+  return auth
 }
 
-// Guard global para verificar se a rota requer autenticação
-router.beforeEach((to, from, next) => {
-  console.log(isAuthenticated())
-  if (to.meta.requiresAuth && !isAuthenticated()) {
-    // Se não estiver autenticado, redireciona para a página de login
-    next({ path: '/' });
-  } else {
-    // Caso contrário, permite o acesso à rota
-    next();
+router.beforeEach(async (to, from, next) => {
+  const auth = await isAuthenticated()
+
+  if (to.meta.requiresAuth && !auth) {
+    return next({ path: '/' });
   }
+
+  next();
 });
 
 export default router;
