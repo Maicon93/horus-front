@@ -22,7 +22,6 @@
   </v-carousel>
 </template>
 
-
 <script>
   export default {
     data: () => ({
@@ -31,12 +30,12 @@
 
     methods: {
       openNotice(item) {
-        console.log(item)
+        this.$router.push(`/noticia/${item.id}`);
       },
 
       async getNotices() {
         try {
-          const response = await this.$http.get('/institution/get-all-notices');
+          const response = await this.$http.get('/institution/get-notices-highlighted');
           return response.body;
         } catch (error) {
           return [];

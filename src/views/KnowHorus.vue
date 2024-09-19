@@ -1,7 +1,5 @@
 <template>
   <div>
-    <navbar />
-
     <div class="py-4 px-8 bg-orange">
       <div class="text-4xl text-center font-medium p-2">Horus Faculdadesddd</div>
 
@@ -113,8 +111,3 @@
     </div>
   </div>
 </template>
-
-
-<script setup>
-  import Navbar from '../components/Navbar.vue'
-</script>

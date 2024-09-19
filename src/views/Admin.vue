@@ -43,8 +43,11 @@ export default {
   methods: {
     async login() {
       await this.$http.post('/admin/login', this.form).then(resp => {
+        if (resp.type == 'error') {
+          return
+        }
         localStorage.setItem('sessionHash', resp.body.sessionHash)
-        this.$router.push('/admin-config');
+        this.$router.push('/admin-config/notices');
       })
     },
   },

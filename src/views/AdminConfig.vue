@@ -1,26 +1,37 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-black">
-    aaaaaaaaaaaaaaaaaaaaaaaaaa
+  <div class="flex bg-black">
+    <div class="hidden lg:block">
+      <AdminMenu />
+    </div>
+
+    <div class="px-2 w-full">
+      <div class="bg-black text-white h-20 flex items-center justify-space-between">
+        <div class="m-4 block lg:hidden">
+          <v-icon color="white">mdi-menu</v-icon>
+        </div>
+        <div class="pr-4 w-full flex justify-end">
+          <v-icon color="white" @click="logout">mdi-logout</v-icon>
+        </div>
+      </div>
+
+      <v-card class="w-full" height="calc(100vh - 5rem)" tile>
+        <RouterView name="admin"/>
+      </v-card>
+    </div>
   </div>
 </template>
 
 <script>
+import AdminMenu from '@/components/admin/AdminMenu.vue';
+
 export default {
-  data() {
-    return {
-      form: {
-        email: 'admin_horus@gmail.com',
-        password: '123',
-      },
-    };
-  },
+  components: { AdminMenu },
 
   methods: {
-    async login() {
-      const response = await this.$http.post('/admin/login', this.form);
-      console.log(response)
-    },
-  },
+    logout() {
+      localStorage.removeItem('sessionHash')
+      this.$router.push('/');
+    }
+  }
 };
 </script>
-

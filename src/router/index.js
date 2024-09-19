@@ -9,18 +9,54 @@ const router = createRouter({
       component: () => import('../views/Home.vue')
     },
     {
+      path: '/conheca-a-horus',
+      component: () => import('../views/KnowHorus.vue')
+    },
+    {
+      path: '/noticia/:id',
+      component: () => import('../views/Notice.vue')
+    },
+    {
+      path: '/noticias',
+      component: () => import('../views/Notices.vue')
+    },
+    {
       path: '/admin',
       component: () => import('../views/Admin.vue')
     },
     {
-      path: '/admin-config',
-      component: () => import('../views/AdminConfig.vue'),
-      meta: { requiresAuth: true } // Indica que essa rota requer autenticação
+      path: '/graduacao/:id',
+      component: () => import('../views/Graduation.vue')
     },
     {
-      path: '/conheca-a-horus',
-      component: () => import('../views/KnowHorus.vue')
+      path: '/admin-config',
+      component: () => import('../views/AdminConfig.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'notices',
+          components: {
+            admin: () => import('../components/admin/Notices.vue')
+          }
+        },
+        {
+          path: 'courses',
+          components: {
+            admin: () => import('../components/admin/Courses.vue')
+          }
+        },
+        {
+          path: 'persons',
+          components: {
+            admin: () => import('../components/admin/Persons.vue')
+          }
+        },
+      ]
     },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/'
+    }
   ]
 })
 

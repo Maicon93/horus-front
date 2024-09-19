@@ -1,0 +1,253 @@
+<template>
+  <div class="bg-black">
+    <div class="grid grid-cols-12 p-4">
+      <div class="block sm:hidden col-span-6 sm:col-span-2 lg:flex items-center justify-center cursor-pointer">
+        <img src="@/assets/images/logo.png" width="100" height="10" class="!p-0" @click="goHome"/>
+      </div>
+
+      <div class="block sm:hidden col-span-6 flex justify-end items-center">
+        <v-menu transition="scale-transition">
+          <template v-slot:activator="{ props }">
+            <v-icon
+              v-bind="props"
+              color="white"
+              icon="mdi-menu"
+              size="x-large"
+            ></v-icon>
+          </template>
+
+          <v-list tile>
+            <v-list-group v-for="(menu, i) in menus" :key="i" transition="scale-transition">
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color="white"
+                  v-bind="props"
+                  class="w-full hover:bg-gray-200"
+                  prepend-icon="mdi-menu-down"
+                >
+                  <span class="text-sm tracking-wide" style="color:black !important;">{{ menu.title }}</span>
+                </v-btn>
+              </template>
+
+              <v-list v-for="(submenu, x) in menu.submenus" :key="x" tile>
+                <v-list-group v-if="submenu.menus && submenu.menus.length" :value="submenu.menus">
+                  <template v-slot:activator="{ props }">
+                    <v-list-item
+                      v-bind="props"
+                      :title="submenu.title"
+                    ></v-list-item>
+                  </template>
+
+                  <v-list-item
+                    class="hover:bg-gray-200"
+                    v-for="(othersMenu, y) in submenu.menus"
+                    :key="y"
+                    :title="othersMenu.title"
+                    :to="othersMenu.url"
+                  />
+                </v-list-group>
+
+                <v-list-item v-if="submenu.linkExtern == true" class="hover:bg-gray-200" density="compact" >
+                  <a :href="submenu.url" target="_blank">
+                    {{ submenu.title }}
+                  </a>
+                </v-list-item>
+
+                <v-list-item
+                  v-if="(!submenu.menus || !submenu.menus.length) && !submenu.linkExtern"
+                  class="hover:bg-gray-200"
+                  density="compact"
+                  :to="submenu.url"
+                  :title="submenu.title"
+                />
+              </v-list>
+            </v-list-group>
+          </v-list>
+        </v-menu>
+
+      </div>
+
+      <div class="hidden sm:block col-span-11 md:col-span-10 lg:col-span-8">
+        <v-text-field
+          label="Pesquisa personalizada"
+          bg-color="white"
+          density="compact"
+          class="w-full"
+        />
+
+        <div class="grid grid-cols-3 md:grid-cols-5 gap-2">
+          <v-menu v-for="(menu, i) in menus" :key="i" transition="scale-transition">
+            <template v-slot:activator="{ props }">
+              <v-btn
+                color="white"
+                v-bind="props"
+                class="w-full"
+                append-icon="mdi-menu-down"
+              >
+                <span class="text-xs xl:text-sm tracking-wide" style="color:black !important">{{ menu.title }}</span>
+              </v-btn>
+            </template>
+
+            <v-list v-for="(submenu, x) in menu.submenus" :key="x" tile>
+              <v-list-group v-if="submenu.menus && submenu.menus.length" :value="submenu.menus">
+                <template v-slot:activator="{ props }">
+                  <v-list-item
+                    v-bind="props"
+                    :title="submenu.title"
+                  ></v-list-item>
+                </template>
+
+                <v-list-item
+                  class="hover:bg-gray-200"
+                  v-for="(othersMenu, y) in submenu.menus"
+                  :key="y"
+                  :title="othersMenu.title"
+                  :to="othersMenu.url"
+                />
+              </v-list-group>
+
+              <v-list-item v-if="submenu.linkExtern == true" class="hover:bg-gray-200" density="compact" >
+                <a :href="submenu.url" target="_blank">
+                  {{ submenu.title }}
+                </a>
+              </v-list-item>
+
+              <v-list-item
+                v-if="(!submenu.menus || !submenu.menus.length) && !submenu.linkExtern"
+                class="hover:bg-gray-200"
+                density="compact"
+                :to="submenu.url"
+                :title="submenu.title"
+              />
+            </v-list>
+          </v-menu>
+        </div>
+
+      </div>
+
+      <div class="hidden sm:block col-span-1 md:col-span-2 lg:flex justify-center gap-2 px-4">
+        <v-icon color="white" icon="mdi-whatsapp" size="x-large" />
+        <v-icon color="white" icon="mdi-instagram" size="x-large" />
+        <v-icon color="white" icon="mdi-facebook" size="x-large" />
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<script>
+  export default {
+    name: 'navbar-commponent',
+
+    data: () => ({
+      menus: [
+        {
+          title: 'Cursos',
+          submenus: [
+            {
+              title: 'Graduação',
+              menus: [
+                { title: 'Administração', url: 'other' },
+                { title: 'Ciências Contábeis', url: 'other' },
+                { title: 'Direito', url: 'other' },
+                { title: 'Educação Física Bacharelado', url: 'other' },
+                { title: 'Educação Física Licenciatura', url: 'other' },
+                { title: 'Engenharia Civil', url: 'other' },
+                { title: 'Pedagogia', url: 'other' },
+                { title: 'Sistemas de Informação', url: 'other' },
+              ]
+            },
+            {
+              title: 'Pós Graduação',
+              menus: [
+                { title: 'Gestão de Cooperativas', url: 'other' },
+                { title: 'Gestão Estratégica de Varejo', url: 'other' },
+                { title: 'Controladoria Auditoria e Finanças', url: 'other' },
+                { title: 'Gestão de Pessoas', url: 'other' },
+                { title: 'Neuropsicopedagogia', url: 'other' },
+                { title: 'Anos Iniciais e Educação Infantil', url: 'other' },
+              ]
+            },
+            {
+              title: 'Extensão',
+              menus: [
+                { title: 'Modelagem 3D com Sketchup', url: 'other' },
+              ]
+            },
+          ]
+        },
+        {
+          title: 'Seletivo 2024',
+          url: 'other'
+        },
+        {
+          title: 'Artigos',
+          submenus: []
+        },
+        {
+          title: 'Institucional',
+          submenus: [
+            {
+              title: 'Instituição',
+              menus: [
+                { title: 'Conheça a Horus', url: 'conheca-a-horus' },
+                { title: 'Instituto Horus', url: 'other' },
+                { title: 'Ouvidoria', url: 'other' },
+                { title: 'Laboratórios', url: 'other' },
+                { title: 'Notícias', url: 'noticias' },
+                { title: 'CPA', url: 'other' },
+              ]
+            },
+            {
+              title: 'Acadêmico',
+              menus: [
+                { title: 'Academico Horus', url: 'other' },
+                { title: 'Bolsas de Estudo', url: 'other' },
+                { title: 'Biblioteca', url: 'other' },
+                { title: 'Balcão de Empregos', url: 'other' },
+                { title: 'Bolsas de Estudo', url: 'other' },
+                { title: 'Periódicos', url: 'other' },
+                { title: 'Revista Alvorada', url: 'other' },
+                { title: 'SAE', url: 'other' },
+              ]
+            },
+          ]
+        },
+        {
+          title: 'Plataformas',
+          submenus: [
+            { title: 'Unimestre', url: 'http://187.45.101.41:8080/projetos/nucleo/uteis/login.php?&tid=0&lid=0&pid=24&arq_ret=R5QT1WSRQBMCVQVPFFQSF99MCT5RT44Q9WRW0RBM0FMM5QQ4', linkExtern: true },
+            { title: 'Plataforma Horus', url: 'https://horus.grupoa.education/plataforma/auth/signin?returnUrl=%2F', linkExtern: true },
+          ],
+        },
+      ],
+    }),
+
+    methods: {
+      async getCourses() {
+        await this.$http.get('/institution/get-all-courses').then(resp => {
+          if (resp.type !== 'success') {
+            return
+          }
+
+          const articles = resp.body.map(a => {
+            return {
+              title: a.name,
+              url: `notices/${a.id}`
+            }
+          })
+
+          this.menus.find(a => a.title == 'Artigos').submenus = articles
+        });
+      },
+
+      goHome() {
+        this.$router.push('/')
+      }
+    },
+
+    async mounted() {
+      await this.getCourses()
+    }
+  }
+</script>
