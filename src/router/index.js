@@ -17,6 +17,10 @@ const router = createRouter({
       component: () => import('../views/Notice.vue')
     },
     {
+      path: '/noticias/:id',
+      component: () => import('../views/Notices.vue')
+    },
+    {
       path: '/noticias',
       component: () => import('../views/Notices.vue')
     },

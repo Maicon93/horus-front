@@ -79,7 +79,7 @@ export default {
   },
 
   mounted() {
-    this.getNotices();
+    this.getNotices(this.$route.params.id);
     this.getCourses();
   },
 };

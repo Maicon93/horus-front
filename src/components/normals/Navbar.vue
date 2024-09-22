@@ -43,12 +43,12 @@
                     v-for="(othersMenu, y) in submenu.menus"
                     :key="y"
                     :title="othersMenu.title"
-                    :to="othersMenu.url"
+                    :href="`${baseUrl}/${othersMenu.url}`"
                   />
                 </v-list-group>
 
                 <v-list-item v-if="submenu.linkExtern == true" class="hover:bg-gray-200" density="compact" >
-                  <a :href="submenu.url" target="_blank">
+                  <a :href="`${baseUrl}/${submenu.url}`" target="_blank">
                     {{ submenu.title }}
                   </a>
                 </v-list-item>
@@ -57,7 +57,7 @@
                   v-if="(!submenu.menus || !submenu.menus.length) && !submenu.linkExtern"
                   class="hover:bg-gray-200"
                   density="compact"
-                  :to="submenu.url"
+                  :href="`${baseUrl}/${submenu.url}`"
                   :title="submenu.title"
                 />
               </v-list>
@@ -102,12 +102,12 @@
                   v-for="(othersMenu, y) in submenu.menus"
                   :key="y"
                   :title="othersMenu.title"
-                  :to="othersMenu.url"
+                  :href="`${baseUrl}/${othersMenu.url}`"
                 />
               </v-list-group>
 
               <v-list-item v-if="submenu.linkExtern == true" class="hover:bg-gray-200" density="compact" >
-                <a :href="submenu.url" target="_blank">
+                <a :href="`${baseUrl}/${submenu.url}`" target="_blank">
                   {{ submenu.title }}
                 </a>
               </v-list-item>
@@ -116,7 +116,7 @@
                 v-if="(!submenu.menus || !submenu.menus.length) && !submenu.linkExtern"
                 class="hover:bg-gray-200"
                 density="compact"
-                :to="submenu.url"
+                :href="`${baseUrl}/${submenu.url}`"
                 :title="submenu.title"
               />
             </v-list>
@@ -140,22 +140,14 @@
     name: 'navbar-commponent',
 
     data: () => ({
+      baseUrl: '',
       menus: [
         {
           title: 'Cursos',
           submenus: [
             {
               title: 'Graduação',
-              menus: [
-                { title: 'Administração', url: 'other' },
-                { title: 'Ciências Contábeis', url: 'other' },
-                { title: 'Direito', url: 'other' },
-                { title: 'Educação Física Bacharelado', url: 'other' },
-                { title: 'Educação Física Licenciatura', url: 'other' },
-                { title: 'Engenharia Civil', url: 'other' },
-                { title: 'Pedagogia', url: 'other' },
-                { title: 'Sistemas de Informação', url: 'other' },
-              ]
+              menus: []
             },
             {
               title: 'Pós Graduação',
@@ -229,16 +221,32 @@
           if (resp.type !== 'success') {
             return
           }
+          this.setArticlesMenu(resp.body)
 
-          const articles = resp.body.map(a => {
-            return {
-              title: a.name,
-              url: `notices/${a.id}`
-            }
-          })
-
-          this.menus.find(a => a.title == 'Artigos').submenus = articles
+          this.setGraduationsMenu(resp.body)
         });
+      },
+
+      setArticlesMenu(body) {
+        const articles = body.map(a => {
+          return {
+            title: a.name,
+            url: `noticias/${a.id}`
+          }
+        })
+
+        this.menus.find(a => a.title == 'Artigos').submenus = articles
+      },
+
+      setGraduationsMenu(data) {
+        const graduations = data.filter(a => a.type == 'Graduação').map(a => {
+          return {
+            title: a.name,
+            url: `graduacao/${a.id}`
+          }
+        })
+
+        this.menus.find(a => a.title == 'Cursos').submenus.find(c => c.title == 'Graduação').menus = graduations
       },
 
       goHome() {
@@ -247,6 +255,7 @@
     },
 
     async mounted() {
+      this.baseUrl = `${window.location.protocol}//${window.location.hostname}:5173`
       await this.getCourses()
     }
   }
