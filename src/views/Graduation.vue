@@ -65,18 +65,14 @@ export default {
 
   methods: {
     async getCourses() {
-      try {
-        await this.$http.get(`/institution/get-course/${this.$route.params.id}`).then(resp => {
-          if (resp.body.length) {
-            this.course = resp.body[0];
-            this.course.duration = (+this.course.duration).toFixed(1)
-            this.course.description = this.course.description.replace(/\n/g, '<br>')
-            this.course.actuation_area = this.course.actuation_area.replace(/\n/g, '<br>')
-          }
-        });
-      } catch (error) {
-        console.log('Erro ao buscar o curso:', error);
-      }
+      await this.$http.get(`/courses/get-course/${this.$route.params.id}`).then(resp => {
+        if (resp.body.length) {
+          this.course = resp.body[0];
+          this.course.duration = (+this.course.duration).toFixed(1)
+          this.course.description = this.course.description.replace(/\n/g, '<br>')
+          this.course.actuation_area = this.course.actuation_area.replace(/\n/g, '<br>')
+        }
+      });
     }
   },
 

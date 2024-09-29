@@ -60,7 +60,7 @@ export default {
 
   methods: {
     async savePerson() {
-      await this.$http.put(`/institution/create-or-update-person`, this.editedPerson).then(() => {
+      await this.$http.put(`/persons/create-or-update-person`, this.editedPerson).then(() => {
         window.location.reload();
       });
     },
@@ -70,7 +70,7 @@ export default {
         return;
       }
 
-      await this.$http.delete(`/institution/delete-person/${item.id}`).then(() => {
+      await this.$http.delete(`/persons/delete-person/${item.id}`).then(() => {
         const index = this.persons.findIndex(person => person.id === item.id);
 
         index !== -1 && this.persons.splice(index, 1);
@@ -94,7 +94,7 @@ export default {
     },
 
     async getPersons() {
-      await this.$http.get('/institution/get-all-persons').then(resp => {
+      await this.$http.get('/persons/get-all-persons').then(resp => {
         this.persons = resp.body;
       });
     },

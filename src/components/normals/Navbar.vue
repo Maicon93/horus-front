@@ -217,7 +217,7 @@
 
     methods: {
       async getCourses() {
-        await this.$http.get('/institution/get-all-courses').then(resp => {
+        await this.$http.get('/courses/get-all-courses').then(resp => {
           if (resp.type !== 'success') {
             return
           }

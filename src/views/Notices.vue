@@ -52,7 +52,7 @@ export default {
     async getNotices(courseId) {
       const uri = courseId ? `?course=${courseId}` : '';
 
-      await this.$http.get(`/institution/get-all-notices${uri}`).then(resp => {
+      await this.$http.get(`/notices/get-all-notices${uri}`).then(resp => {
         this.notices = resp.body.map(notice => ({
           id: notice.id,
           title: notice.title,
@@ -68,7 +68,7 @@ export default {
     },
 
     async getCourses() {
-      await this.$http.get(`/institution/get-all-courses`).then(resp => {
+      await this.$http.get(`/courses/get-all-courses`).then(resp => {
         this.courses = resp.body;
         this.courses.push({
           id: null,

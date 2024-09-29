@@ -35,7 +35,7 @@
 
       async getNotices() {
         try {
-          const response = await this.$http.get('/institution/get-notices-highlighted');
+          const response = await this.$http.get('/notices/get-notices-highlighted');
           return response.body;
         } catch (error) {
           return [];

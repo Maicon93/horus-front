@@ -89,7 +89,7 @@ export default {
         formData.append('image', notice.newImage[0]);
       }
 
-      await this.$http.post('/institution/save-notice', formData, {
+      await this.$http.post('/notices/save-notice', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -97,7 +97,7 @@ export default {
     },
 
     async getCourses() {
-      await this.$http.get('/institution/get-all-courses').then(resp => {
+      await this.$http.get('/courses/get-all-courses').then(resp => {
         this.courses = resp.body
       });
     },
@@ -107,13 +107,13 @@ export default {
         return
       }
 
-      await this.$http.delete(`/institution/delete-notice/${notice.id}`).then(resp => {
+      await this.$http.delete(`/notices/delete-notice/${notice.id}`).then(resp => {
         window.location.reload()
       });
     },
 
     async getNotices() {
-      await this.$http.get('/institution/get-all-notices').then(resp => {
+      await this.$http.get('/notices/get-all-notices').then(resp => {
         const noticesGroupedByCourse = resp.body.reduce((acc, notice) => {
           const courseName = notice.name;
           if (!acc[courseName]) {

@@ -130,13 +130,13 @@ export default {
     },
 
     async getCourses() {
-      await this.$http.get('/institution/get-all-courses').then(resp => {
+      await this.$http.get('/courses/get-all-courses').then(resp => {
         this.courses = resp.body;
       });
     },
 
     async getPersons() {
-      await this.$http.get('/institution/get-all-persons').then(resp => {
+      await this.$http.get('/persons/get-all-persons').then(resp => {
         this.persons = resp.body;
       });
     },
@@ -166,7 +166,7 @@ export default {
       this.selectedTeachers = []
       this.selectedCourse = { ...course || [] };
 
-      await this.$http.get(`/institution/get-teachers-by-course/${course.id}`).then(resp => {
+      await this.$http.get(`/persons/get-teachers-by-course/${course.id}`).then(resp => {
         this.selectedTeachers = resp.body.map(a => a.id)
       });
 
