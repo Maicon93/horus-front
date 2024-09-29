@@ -6,10 +6,24 @@ export default {
     const axiosInstance = axios.create({
       baseURL: 'http://localhost:3000/',
       timeout: 10000,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     })
+
+    axiosInstance.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem('sessionHash')
+
+        if (token) {
+          config.headers.token = token;
+        }
+
+        return config;
+      },
+      (error) => {
+        app.config.globalProperties.$toast.error('Erro ao preparar a requisição');
+        return Promise.reject(error);
+      }
+    );
 
     axiosInstance.interceptors.response.use(
       (response) => {
