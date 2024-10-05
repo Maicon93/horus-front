@@ -13,6 +13,10 @@ const router = createRouter({
       component: () => import('../views/KnowHorus.vue')
     },
     {
+      path: '/instituto-horus',
+      component: () => import('../views/InstitutHorus.vue')
+    },
+    {
       path: '/noticia/:id',
       component: () => import('../views/Notice.vue')
     },

@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" :width="options.width" :style="{ zIndex: options.zIndex }" persistent>
     <v-card>
-      <v-toolbar class="bg-black" dense flat>
+      <v-toolbar class="!bg-oil" dense flat>
         <div class="p-2 text-white text-2xl">{{ title }}</div>
       </v-toolbar>
 

@@ -18,3 +18,7 @@
 .btn-black > span {
   color: white !important;
 }
+
+.gradient {
+  background: linear-gradient(to right, #f5771d, #f1c6a7);
+}

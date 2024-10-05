@@ -69,7 +69,14 @@
             density="compact"
           />
 
-          <h3 class="mt-4 mb-2 font-bold">Professores</h3>
+          <v-file-input
+            v-model="selectedCourse.pdf"
+            label="PDF da Grade Curricular"
+            variant="outlined"
+            show-size
+          />
+
+          <h3 class="mt-4 mb-2 font-bold">Docenter</h3>
 
           <v-text-field
             v-model="search"
@@ -122,33 +129,55 @@ export default {
 
   methods: {
     async saveCourse(course) {
-      course.teachers = this.selectedTeachers
+      const formData = new FormData();
 
-      await this.$http.put('/institution/create-or-update-course', course).then(() => {
+      course.id && formData.append('id', course.id)
+      formData.append('actuation_area', course.actuation_area)
+      formData.append('description', course.description)
+      formData.append('duration', course.duration)
+      formData.append('id_coordinator', course.id_coordinator)
+      formData.append('name', course.name)
+      formData.append('name_coordinator', course.name_coordinator)
+      formData.append('type', course.type)
+      formData.append('video_frame', course.video_frame)
+      formData.append('teachers', this.selectedTeachers)
+
+      if (course.pdf) {
+        const teachingCurriculumName = `${course.name}-${Math.round(Math.random() * 1E9)}.pdf`
+
+        formData.append('teachingCurriculumName', teachingCurriculumName)
+        formData.append('pdf', course.pdf)
+      }
+
+      await this.$http.put('/courses/create-or-update-course', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(() => {
         window.location.reload()
-      });
+      })
     },
 
     async getCourses() {
       await this.$http.get('/courses/get-all-courses').then(resp => {
-        this.courses = resp.body;
-      });
+        this.courses = resp.body
+      })
     },
 
     async getPersons() {
       await this.$http.get('/persons/get-all-persons').then(resp => {
-        this.persons = resp.body;
-      });
+        this.persons = resp.body
+      })
     },
 
     async deleteCourse(course) {
       if (!await this.$confirm('Deseja realmente remover este curso?')) {
-        return;
+        return
       }
 
-      await this.$http.delete(`/institution/delete-course/${course.id}`).then(resp => {
-        window.location.reload();
-      });
+      await this.$http.delete(`/courses/delete-course/${course.id}`).then(resp => {
+        window.location.reload()
+      })
     },
 
     addNewCourse() {
@@ -157,6 +186,7 @@ export default {
         name: "",
         description: "",
         actuation_area: "",
+        pdf: null,
       };
 
       this.selectedTeachers = []
@@ -164,7 +194,7 @@ export default {
 
     async selectCourse(course) {
       this.selectedTeachers = []
-      this.selectedCourse = { ...course || [] };
+      this.selectedCourse = { ...course || [] }
 
       await this.$http.get(`/persons/get-teachers-by-course/${course.id}`).then(resp => {
         this.selectedTeachers = resp.body.map(a => a.id)
@@ -174,8 +204,8 @@ export default {
   },
 
   async mounted() {
-    await this.getPersons();
-    await this.getCourses();
+    await this.getPersons()
+    await this.getCourses()
   }
 };
 </script>

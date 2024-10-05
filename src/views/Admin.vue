@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-black">
+  <div class="min-h-screen flex items-center justify-center bg-oil">
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
       <h2 class="text-center text-2xl font-bold mb-6">Login</h2>
       <v-form>

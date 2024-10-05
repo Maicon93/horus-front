@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black flex flex-col items-center" style="min-height: calc(100vh - 8rem)">
+  <div class="bg-oil flex flex-col items-center" style="min-height: calc(100vh - 8rem)">
     <div class="p-2 text-white text-justify w-full md:w-5/6 lg:w-5/6 xl:w-2/3">
       <v-card class="flex justify-center">
         <div v-if="notice" class="py-5 px-10">

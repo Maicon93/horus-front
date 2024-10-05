@@ -1,10 +1,18 @@
 <template>
-  <div class="bg-black p-12">
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <div v-for="seal in seals" :key="seal" class="flex justify-center items-center">
-        <img :src="seal" class="">
-      </div>
+  <div class="bg-oil w-full flex justify-center items-center gap-4 pb-4">
+    <img src="@/assets/images/seals/seal_max_note.webp" :width="140">
+
+    <div>
+      <li class="hidden sm:block text-orange text-xs sm:text-xs md:text-sm lg:text-md">RECREDENCIADA PELA PORTARIA MEC nº 826/2020 de 14/10/20</li>
+      <li class="hidden sm:block text-orange text-xs sm:text-xs md:text-sm lg:text-md mt-4">CREDENCIAMENTO ENSINO À DISTÂNCIA PORTARIA MEC Nº 2.028, 21/11/19</li>
     </div>
+
+    <img src="@/assets/images/seals/seal_better_university.webp" :width="140">
+  </div>
+
+  <div class="block sm:hidden bg-oil px-12 py-4">
+    <li class="text-orange text-xs">RECREDENCIADA PELA PORTARIA MEC nº 826/2020 de 14/10/20</li>
+    <li class="text-orange text-xs mt-4">CREDENCIAMENTO ENSINO À DISTÂNCIA PORTARIA MEC Nº 2.028, 21/11/19</li>
   </div>
 </template>
 
@@ -17,18 +25,6 @@
     }),
 
     methods: {
-      async getSeals() {
-        try {
-          const response = await this.$http.get('/institution/get-all-seals');
-          this.seals = response.body
-        } catch (error) {
-          return [];
-        }
-      },
-    },
-
-    async mounted() {
-      await this.getSeals();
     },
   }
 </script>

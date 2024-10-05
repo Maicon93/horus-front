@@ -1,5 +1,5 @@
 <template>
-  <v-carousel hide-delimiters v-if="pages.length > 0" class="bg-black p-10 lg:p-28 xl:px-38">
+  <v-carousel hide-delimiters v-if="pages.length > 0" class="bg-oil p-10 lg:p-28 xl:px-38">
     <v-carousel-item v-for="(page, pageIndex) in pages" :key="pageIndex">
       <div class="flex justify-around items-center space-x-4">
         <div v-for="(item, index) in page" :key="index" class="w-[350px] h-[390px] pb-5">

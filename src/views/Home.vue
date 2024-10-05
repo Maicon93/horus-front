@@ -1,9 +1,8 @@
 <template>
   <div>
-
+    <Seals />
     <CarrousselInformations />
     <CarrousselNotices />
-    <Seals />
     <Contact />
   </div>
 </template>

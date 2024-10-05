@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" width="350" height="100vh" tile>
     <div>
-      <div class="bg-black text-white h-20 flex p-4 items-center border-r-2">
+      <div class="bg-oil text-white h-20 flex p-4 items-center border-r-2">
         <img src="@/assets/images/logo.png" width="60" height="10" class="!p-0" />
       </div>
     </div>
@@ -34,7 +34,7 @@
 
     data: () => ({
       items: [
-        { title: 'Pessoas', icon: 'mdi-account-multiple', url: '/admin-config/persons' },
+        { title: 'Docentes', icon: 'mdi-account-multiple', url: '/admin-config/persons' },
         { title: 'Cursos', icon: 'mdi-book-account', url: '/admin-config/courses' },
         { title: 'Noticias', icon: 'mdi-bulletin-board', url: '/admin-config/notices' },
       ],

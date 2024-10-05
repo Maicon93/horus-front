@@ -1,11 +1,11 @@
 <template>
-  <div class="flex bg-black">
+  <div class="flex bg-oil">
     <div class="hidden lg:block">
       <AdminMenu />
     </div>
 
     <div class="px-2 w-full">
-      <div class="bg-black text-white h-20 flex items-center justify-space-between">
+      <div class="bg-oil text-white h-20 flex items-center justify-space-between">
         <div class="m-4 block lg:hidden">
           <v-icon color="white">mdi-menu</v-icon>
         </div>

@@ -1,4 +1,8 @@
 <template>
+  <div style="position: fixed; right: 35px; bottom: 35px; z-index: 999;" class="bg-transparent" @click="redirectWhatsapp">
+    <img src="@/assets/images/whatsapp.png" width="50" class="cursor-pointer" />
+  </div>
+
   <Navbar v-if="showNavbar"/>
   <RouterView />
 
@@ -7,7 +11,7 @@
 </template>
 
 <script>
-import ConfirmDialog from '@/components/functions/ConfirmDialog.vue';
+  import ConfirmDialog from '@/components/functions/ConfirmDialog.vue';
   import Navbar from '@/components/normals/Navbar.vue'
 
 export default {
@@ -28,6 +32,14 @@ export default {
   methods: {
     confirm(title, message, options = {}) {
       return this.$refs.confirmDialog.open(title, message, options);
+    },
+
+    redirectWhatsapp() {
+      const phoneNumber = '5549988685923';
+      const message = 'Olá, gostaria de mais informações sobre a Horus Faculdades!'; // A mensagem predefinida
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+      window.open(url, '_blank');
     }
   },
 };

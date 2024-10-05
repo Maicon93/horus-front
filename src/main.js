@@ -8,6 +8,7 @@ import router from './router'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import registerGlobalComponents from './plugins/registerGlobalComponents';
+import 'leaflet/dist/leaflet.css';
 
 const app = createApp(App)
 

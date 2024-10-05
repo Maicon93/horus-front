@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-black">
+  <div class="bg-oil">
     <div class="grid grid-cols-12 p-4">
-      <div class="block sm:hidden col-span-6 sm:col-span-2 lg:flex items-center justify-center cursor-pointer">
-        <img src="@/assets/images/logo.png" width="100" height="10" class="!p-0" @click="goHome"/>
+      <div class="col-span-6 sm:col-span-2 lg:flex items-center justify-center cursor-pointer">
+        <img src="@/assets/images/orange-logo.png" width="100" height="10" class="!p-0" @click="goHome" />
       </div>
 
       <div class="block sm:hidden col-span-6 flex justify-end items-center">
@@ -64,10 +64,9 @@
             </v-list-group>
           </v-list>
         </v-menu>
-
       </div>
 
-      <div class="hidden sm:block col-span-11 md:col-span-10 lg:col-span-8">
+      <div class="hidden sm:block col-span-10">
         <v-text-field
           label="Pesquisa personalizada"
           bg-color="white"
@@ -79,12 +78,12 @@
           <v-menu v-for="(menu, i) in menus" :key="i" transition="scale-transition">
             <template v-slot:activator="{ props }">
               <v-btn
-                color="white"
+                color="primary"
                 v-bind="props"
                 class="w-full"
                 append-icon="mdi-menu-down"
               >
-                <span class="text-xs xl:text-sm tracking-wide" style="color:black !important">{{ menu.title }}</span>
+                <span class="text-xs xl:text-sm tracking-wide text-gray-200">{{ menu.title }}</span>
               </v-btn>
             </template>
 
@@ -125,11 +124,6 @@
 
       </div>
 
-      <div class="hidden sm:block col-span-1 md:col-span-2 lg:flex justify-center gap-2 px-4">
-        <v-icon color="white" icon="mdi-whatsapp" size="x-large" />
-        <v-icon color="white" icon="mdi-instagram" size="x-large" />
-        <v-icon color="white" icon="mdi-facebook" size="x-large" />
-      </div>
     </div>
   </div>
 </template>
@@ -169,12 +163,8 @@
           ]
         },
         {
-          title: 'Seletivo 2024',
+          title: 'Seletivo 2025',
           url: 'other'
-        },
-        {
-          title: 'Artigos',
-          submenus: []
         },
         {
           title: 'Institucional',
@@ -183,10 +173,9 @@
               title: 'Instituição',
               menus: [
                 { title: 'Conheça a Horus', url: 'conheca-a-horus' },
-                { title: 'Instituto Horus', url: 'other' },
+                { title: 'Instituto Horus', url: 'instituto-horus' },
                 { title: 'Ouvidoria', url: 'other' },
                 { title: 'Laboratórios', url: 'other' },
-                { title: 'Notícias', url: 'noticias' },
                 { title: 'CPA', url: 'other' },
               ]
             },
@@ -203,6 +192,14 @@
                 { title: 'SAE', url: 'other' },
               ]
             },
+            {
+              title: 'Artigos',
+              menus: []
+            },
+            {
+              title: 'Notícias',
+              url: 'noticias'
+            },
           ]
         },
         {
@@ -210,6 +207,13 @@
           submenus: [
             { title: 'Unimestre', url: 'http://187.45.101.41:8080/projetos/nucleo/uteis/login.php?&tid=0&lid=0&pid=24&arq_ret=R5QT1WSRQBMCVQVPFFQSF99MCT5RT44Q9WRW0RBM0FMM5QQ4', linkExtern: true },
             { title: 'Plataforma Horus', url: 'https://horus.grupoa.education/plataforma/auth/signin?returnUrl=%2F', linkExtern: true },
+          ],
+        },
+        {
+          title: 'Consulta de Diplomas',
+          submenus: [
+            { title: 'Consulta Public', url: 'http://unimestre.horus.edu.br:8080/gestao/public/consulta-publica/diploma', linkExtern: true },
+            { title: 'Consulta Histórico', url: 'http://unimestre.horus.edu.br:8080/gestao/public/consulta-publica/historico', linkExtern: true },
           ],
         },
       ],
@@ -235,7 +239,7 @@
           }
         })
 
-        this.menus.find(a => a.title == 'Artigos').submenus = articles
+        this.menus.find(a => a.title == 'Institucional').submenus.find(b => b.title == 'Artigos').menus = articles
       },
 
       setGraduationsMenu(data) {

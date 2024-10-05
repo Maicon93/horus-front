@@ -43,7 +43,9 @@
           show-size
         />
 
-        <v-btn v-else @click="updateImage(selectedNotice)" class="btn-black bg-black">Alterar Imagem</v-btn>
+        <v-btn v-else color="#00051a" @click="updateImage(selectedNotice)">
+          <label class="text-white">Alterar Imagem</label>
+        </v-btn>
 
         <v-switch v-model="selectedNotice.highlighted" color="success" label="Destacar na página principal" />
 
@@ -71,6 +73,7 @@ export default {
   methods: {
     async saveNotice(notice) {
       const formData = new FormData();
+
       let nameImage = ''
       if (!!notice.newImage) {
         nameImage = `${notice.id_course}-${Math.round(Math.random() * 1E9)}-${notice.newImage[0].name}`

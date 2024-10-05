@@ -10,6 +10,7 @@
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
+    "leaflet": "^1.9.4",
     "pinia": "^2.1.7",
     "vite-plugin-vuetify": "^2.0.3",
     "vue": "^3.4.29",

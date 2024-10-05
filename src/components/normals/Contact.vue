@@ -3,27 +3,40 @@
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="flex flex-col space-y-4">
         <h2 class="text-center font-bold text-lg">Encontre-nos</h2>
-        <div class="flex items-start space-x-4">
+        <div class="flex gap-2 items-center">
           <v-icon color="black">mdi-map-marker</v-icon>
           <div>
             <p>Av. Brasília - 625</p>
             <p>Pinhalzinho, SC 89870-000</p>
           </div>
         </div>
-        <div class="flex items-start space-x-4">
+
+        <div class="flex gap-2 items-center">
           <v-icon color="black">mdi-email</v-icon>
           <a href="mailto:atendimento@horus.edu.br" class="hover:underline">
             atendimento@horus.edu.br
           </a>
         </div>
-        <div class="flex items-start space-x-4">
+
+        <div class="flex gap-2 items-center">
           <v-icon color="black">mdi-phone</v-icon>
-          <div>
-            <p>(49) 3366-1890</p>
-            <p>(49) 3366-3912</p>
-            <p>(49) 988685923</p>
-          </div>
+          <p>(49) 3366-1890</p>
         </div>
+
+        <div class="flex gap-2 items-center">
+          <v-icon icon="mdi-whatsapp" size="x-large" />
+          <p>(49) 988685923</p>
+        </div>
+
+        <div class="flex gap-2 items-center">
+          <v-icon icon="mdi-instagram" size="x-large" />
+          <a href="https://www.instagram.com/horusfaculdadespzo/" target="_blank" class="hover:underline">
+            @horusfaculdadespzo
+          </a>
+        </div>
+    <div class="flex justify-center my-10">
+      <div id="map" style="width: 600px; height: 300px; border-radius: 10px;"></div>
+    </div>
       </div>
 
       <div class="bg-white mx-0 sm:mx-8 p-4 sm:p-6 rounded-lg shadow-md">
@@ -54,6 +67,7 @@
 </template>
 
 <script>
+import leaflet from 'leaflet';
 export default {
   data() {
     return {
@@ -70,6 +84,22 @@ export default {
     submitForm() {
     },
   },
+
+  mounted() {
+    const map = leaflet.map('map', {
+      scroleafletlWheelZoom: true,
+      zoomControl: true
+    }).setView([-26.840963100458175, -52.98685822972665], 13);
+    map.setZoom(15)
+
+    leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    leaflet.marker([-26.840963100458175, -52.98685822972665]).addTo(map)
+      .bindPopup('Horus Faculdades!')
+      .openPopup();
+  }
 };
 </script>
 
