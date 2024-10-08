@@ -13,7 +13,6 @@
 
     <div class="col-span-2"></div>
 
-
     <v-data-table :items="persons" :headers="headers" :search="search">
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon class="me-2" size="small" @click="openDialog('edit', item)">mdi-pencil</v-icon>
@@ -28,13 +27,37 @@
         </v-toolbar>
 
         <div class="p-4">
-          <v-text-field v-model="editedPerson.name" label="Nome" variant="outlined" />
-          <v-text-field v-model="editedPerson.email" label="Email" variant="outlined" />
+          <v-text-field
+            v-model="editedPerson.name"
+            label="Nome"
+            variant="outlined"
+          />
+
+          <v-text-field
+            v-model="editedPerson.email"
+            label="Email"
+            variant="outlined"
+          />
+
+          <div v-if="showImage" class="flex justify-center items-center flex-col gap-4">
+            <img :src="editedPerson.image_url" width="300" height="250" class="rounded-lg shadow-lg"/>
+            <v-btn color="primary" density="compact" class="btn-black" @click="alterImageTeacher">Alterar Imagem</v-btn>
+          </div>
+
+
+          <v-file-input
+            v-else
+            v-model="editedPerson.image"
+            label="Imagem"
+            variant="outlined"
+            show-size
+            density="compact"
+          />
         </div>
 
         <div class="flex p-4 justify-space-between">
           <v-btn color="oil" @click="closeDialog">Cancelar</v-btn>
-          <v-btn color="success" @click="savePerson"><span>Salvar</span></v-btn>
+          <v-btn color="success" @click="savePerson(editedPerson)">Salvar</v-btn>
         </div>
       </v-card>
     </v-dialog>
@@ -44,18 +67,22 @@
 <script>
 export default {
   inject: ['$confirm'],
+
   data: () => ({
     search: '',
+    showImage: false,
     persons: [],
     dialog: false,
     dialogMode: 'new',
     editedPerson: {
       name: '',
       email: '',
+      image: null,
     },
     defaultPerson: {
       name: '',
       email: '',
+      image: null,
     },
     selectedPerson: null,
     headers: [
@@ -66,10 +93,27 @@ export default {
   }),
 
   methods: {
-    async savePerson() {
-      await this.$http.put(`/persons/create-or-update-person`, this.editedPerson).then(() => {
-        window.location.reload();
-      });
+    async savePerson(person) {
+      const nameNormalized = person.name.trim().replace(/\s+/g, '');
+
+      const formData = new FormData();
+
+      person.id && formData.append('id', person.id)
+      formData.append('email', person.email)
+      formData.append('name', person.name)
+      formData.append('old_image_name', person.old_image_name)
+
+      if (person.image) {
+        const imageName = `${nameNormalized}-${Math.round(Math.random() * 1E9)}`
+        formData.append('imageName', imageName)
+        formData.append('image', person.image);
+      }
+
+      await this.$http.put('/persons/create-or-update-person', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(() => window.location.reload())
     },
 
     async deletePerson(item) {
@@ -84,10 +128,16 @@ export default {
       });
     },
 
+    alterImageTeacher() {
+      this.showImage = !this.showImage
+    },
+
     openDialog(mode, person = null) {
       if (mode !== 'edit' || person) {
         this.dialogMode = mode;
         this.defaultPerson = person;
+
+        this.showImage = this.defaultPerson.image_url ? true : false
 
         this.editedPerson = Object.assign({}, this.defaultPerson);
         return this.dialog = true;
@@ -102,6 +152,7 @@ export default {
 
     async getPersons() {
       await this.$http.get('/persons/get-all-persons').then(resp => {
+        console.log(resp.body)
         this.persons = resp.body;
       });
     },

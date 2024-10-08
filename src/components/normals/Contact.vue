@@ -39,7 +39,7 @@
     </div>
       </div>
 
-      <div class="bg-white mx-0 sm:mx-8 p-4 sm:p-6 rounded-lg shadow-md">
+      <div class="bg-white mx-0 sm:mx-8 p-0 sm:p-6 rounded-lg shadow-md">
         <v-form>
           <div class="text-lg font-bold text-center pb-6">Envienos um e-mail que responderemos assim que possível</div>
 

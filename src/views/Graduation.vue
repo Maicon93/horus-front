@@ -17,16 +17,31 @@
         </div>
 
         <div class="grid-cols-2 bg-white p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105 text-gray-800">
-          <div class="mb-4 text-center text-3xl font-bold drop-shadow-lg gradient border-lg">
-            Docentes
-          </div>
-          <li v-for="(teacher, index) in course.teachers" :key="index" class="mb-2 ml-4">
-            {{ teacher }}
-          </li>
+          <div>
+            <div class="mb-4 text-center text-3xl font-bold drop-shadow-lg gradient border-lg">
+              Coordenador(a)
+            </div>
 
-          <v-btn color="primary" @click="downloadPdf(course.teaching_curriculum)">
-            <span class="text-black">Grade Curricular</span>
-          </v-btn>
+            <div class="flex justify-center items-center flex-col gap-2">
+              <img v-if="course.image_url" :src="course.image_url" width="300" height="250" class="rounded-full shadow-lg"/>
+              <div>
+                {{ course.name_coordinator }}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-center items-center flex my-8">
+            <v-btn color="primary" @click="downloadPdf(course.teaching_curriculum)">Grade Curricular</v-btn>
+          </div>
+
+          <div class="mt-20">
+            <div class="my-8 text-center text-3xl font-bold drop-shadow-lg gradient border-lg">
+              Docentes
+            </div>
+            <li v-for="(teacher, index) in course.teachers" :key="index" class="mb-2 ml-4">
+              {{ teacher }}
+            </li>
+          </div>
         </div>
       </section>
 
@@ -88,18 +103,16 @@ export default {
           responseType: 'blob'
         });
 
-
         const blob = new Blob([response], { type: 'application/pdf' });
-
         const link = document.createElement('a');
+
         link.href = window.URL.createObjectURL(blob);
         link.download = fileName;
         link.click();
 
         window.URL.revokeObjectURL(link.href);
-
       } catch (error) {
-        console.error('Erro ao fazer o download do arquivo:', error);
+        this.$toast.error('Erro ao fazer o download do arquivo')
       }
     }
   },
