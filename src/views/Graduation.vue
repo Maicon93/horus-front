@@ -31,7 +31,7 @@
           </div>
 
           <div class="flex justify-center items-center flex my-8">
-            <v-btn color="primary" @click="downloadPdf(course.teaching_curriculum)">Grade Curricular</v-btn>
+            <v-btn color="primary" @click="downloadPdf(course.teaching_curriculum)"><label class="font-bold">Grade Curricular</label></v-btn>
           </div>
 
           <div class="mt-20">
@@ -51,27 +51,28 @@
           <div class="absolute inset-0 flex flex-col items-center my-1 p-2">
             <div class="
               p-2
-              text-white
+              font-bold
               text-center
               text-2xl
               drop-shadow-lg
               bg-gradient-to-r from-orange-300 via-orange-500 to-orange-300
               w-full
-              rounded-lg"
+              rounded-lg
+              border-md"
             >
               Tipo do Curso
             </div>
             <div class="flex pt-3 items-center justify-center">
               <img src="@/assets/images/seals/graduation.png" class="w-48"/>
               <div>
-                <span class="text-white text-2xl block">{{ course.type }}</span>
-                <span class="text-white text-2xl block mt-4 mb-2">{{ course.duration }} anos</span>
+                <span class="font-bold text-2xl block">{{ course.type }}</span>
+                <span class="font-bold text-2xl block mt-4 mb-2">{{ course.duration }} anos</span>
               </div>
             </div>
           </div>
 
           <div class="flex justify-center my-8">
-            <v-btn color="primary"><span class="text-white">Matricule-se</span></v-btn>
+            <v-btn color="primary"><label class="font-bold">Matricule-se</label></v-btn>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
   <div>
     <x-body-content>
       <div class="p-6  text-white">
-        <section class="mb-4 text-center text-4xl md:text-5xl font-bold drop-shadow-lg bg-gradient-to-r from-red-500 to-orange-500 border-lg">
+        <section class="mb-4 text-center text-4xl md:text-5xl font-bold drop-shadow-lg gradient border-lg">
           Horus Faculdades
         </section>
 

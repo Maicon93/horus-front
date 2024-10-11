@@ -1,8 +1,8 @@
 <template>
   <div>
     <x-body-content>
-      <div class="p-6  text-white">
-        <section class="mb-4 text-center text-4xl md:text-5xl font-bold drop-shadow-lg bg-gradient-to-r from-red-500 to-orange-500 border-lg">
+      <div class="p-6 ">
+        <section class="mb-4 text-center text-4xl md:text-5xl font-bold drop-shadow-lg gradient border-lg">
           O Instituto
         </section>
 
@@ -15,30 +15,30 @@
 
         <section class="grid p-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           <div class="bg-orange w-full border-md rounded-md">
-            <div class="text-center text-white p-4 text-2xl">Missão</div>
-            <p class="px-4 pb-4 text-white text-md text-center">
+            <div class="text-center p-4 text-2xl font-bold">Missão</div>
+            <p class="px-4 pb-4 text-md text-center">
               O Instituto Horus busca fomentar e promover as transformações sociais por meio da educação, cultura, esporte e a
               responsabilidade socio-ambiental contribuindo como agente de evolução social nas comunidades por meio de uma gestão sustentável.
             </p>
           </div>
 
           <div class="bg-orange w-full border-md rounded-md">
-            <div class="text-center text-white p-4 text-2xl">Missão</div>
-            <p class="px-4 pb-4 text-white text-md text-center">
+            <div class="text-center p-4 text-2xl font-bold">Missão</div>
+            <p class="px-4 pb-4 text-md text-center">
               Ser reconhecido como agente transformador, efetivando parcerias com a comunidade e transformando vidas.
             </p>
           </div>
 
           <div class="bg-orange w-full border-md rounded-md">
-            <div class="text-center text-white p-4 text-2xl">Valores</div>
-            <div class="px-4 pb-4 text-white text-md">
-              <li class="text-white">Ética e respeito;</li>
-              <li class="text-white">Trabalho em Equipe;</li>
-              <li class="text-white">Proatividade;</li>
-              <li class="text-white">Comprometimento;</li>
-              <li class="text-white">Valorização humana;</li>
-              <li class="text-white">Responsabilidade Socio-ambiental;</li>
-              <li class="text-white">Sustentabilidade;</li>
+            <div class="text-center p-4 text-2xl font-bold">Valores</div>
+            <div class="px-4 pb-4 text-md">
+              <li>Ética e respeito;</li>
+              <li>Trabalho em Equipe;</li>
+              <li>Proatividade;</li>
+              <li>Comprometimento;</li>
+              <li>Valorização humana;</li>
+              <li>Responsabilidade Socio-ambiental;</li>
+              <li>Sustentabilidade;</li>
             </div>
           </div>
         </section>

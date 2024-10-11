@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" :width="options.width" :style="{ zIndex: options.zIndex }" persistent>
     <v-card>
-      <v-toolbar class="secondary" dense flat>
+      <v-toolbar color="secondary" dense flat>
         <div class="p-2 text-white text-2xl">{{ title }}</div>
       </v-toolbar>
 
@@ -9,7 +9,7 @@
 
       <div class="flex gap-2 p-2 justify-space-between">
         <v-btn color="black" @click="cancel" class="btn-black">Cancelar</v-btn>
-        <v-btn color="success" @click="agree" class="btn-black">Salvar</v-btn>
+        <v-btn color="success" @click="agree" class="btn-black">Confirmar</v-btn>
       </div>
     </v-card>
   </v-dialog>

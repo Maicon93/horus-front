@@ -1,5 +1,6 @@
 <template>
-  <div style="position: fixed; right: 35px; bottom: 35px; z-index: 999;" class="bg-transparent" @click="redirectWhatsapp">
+  <div style="position: fixed; right: 20px; bottom: 25px; z-index: 999;" class="bg-transparent flex gap-2" @click="redirectWhatsapp">
+    <img src="@/assets/images/instagram.png" width="50" class="cursor-pointer" />
     <img src="@/assets/images/whatsapp.png" width="50" class="cursor-pointer" />
   </div>
 

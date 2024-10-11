@@ -48,7 +48,7 @@
                 </v-list-group>
 
                 <v-list-item v-if="submenu.linkExtern == true" class="hover:bg-gray-200" density="compact" >
-                  <a :href="`${baseUrl}/${submenu.url}`" target="_blank">
+                  <a :href="`${submenu.url}`" target="_blank">
                     {{ submenu.title }}
                   </a>
                 </v-list-item>
@@ -106,7 +106,7 @@
               </v-list-group>
 
               <v-list-item v-if="submenu.linkExtern == true" class="hover:bg-gray-200" density="compact" >
-                <a :href="`${baseUrl}/${submenu.url}`" target="_blank">
+                <a :href="`${submenu.url}`" target="_blank">
                   {{ submenu.title }}
                 </a>
               </v-list-item>

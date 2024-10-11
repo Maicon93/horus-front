@@ -133,11 +133,11 @@ export default {
     },
 
     openDialog(mode, person = null) {
-      if (mode !== 'edit' || person) {
+      if (mode !== 'edit') {
         this.dialogMode = mode;
         this.defaultPerson = person;
 
-        this.showImage = this.defaultPerson.image_url ? true : false
+        this.showImage = this.defaultPerson?.image_url ? true : false
 
         this.editedPerson = Object.assign({}, this.defaultPerson);
         return this.dialog = true;
@@ -152,7 +152,6 @@ export default {
 
     async getPersons() {
       await this.$http.get('/persons/get-all-persons').then(resp => {
-        console.log(resp.body)
         this.persons = resp.body;
       });
     },

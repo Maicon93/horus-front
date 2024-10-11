@@ -26,10 +26,10 @@ export default {
   methods: {
     async getNotice() {
       await this.$http.get(`/notices/get-notice/${this.$route.params.id}`).then(resp => {
-          if (resp.body.length) {
-            this.notice = resp.body[0]
-            this.notice.text = this.notice.text.replace(/\n/g, '<br>')
-          }
+        if (resp.body.length) {
+          this.notice = resp.body[0]
+          this.notice.text = this.notice.text.replace(/\n/g, '<br>')
+        }
       })
     }
   },
