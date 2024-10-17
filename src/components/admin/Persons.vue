@@ -117,7 +117,7 @@ export default {
     },
 
     async deletePerson(item) {
-      if (!await this.$confirm('Deseja realmente remover esta pessoa?')) {
+      if (!await this.$confirm('Deseja realmente remover este docente?')) {
         return;
       }
 
