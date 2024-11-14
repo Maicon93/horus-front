@@ -143,7 +143,9 @@ export default {
         return this.dialog = true;
       }
 
-      return this.editedPerson = Object.assign({}, person);
+      this.editedPerson = Object.assign({}, person)
+      this.dialog = true
+      return
     },
 
     closeDialog() {

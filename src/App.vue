@@ -1,7 +1,7 @@
 <template>
-  <div style="position: fixed; right: 20px; bottom: 25px; z-index: 999;" class="bg-transparent flex gap-2" @click="redirectWhatsapp">
-    <img src="@/assets/images/instagram.png" width="50" class="cursor-pointer" />
-    <img src="@/assets/images/whatsapp.png" width="50" class="cursor-pointer" />
+  <div style="position: fixed; right: 20px; bottom: 25px; z-index: 999;" class="bg-transparent flex gap-2">
+    <img src="@/assets/images/instagram.png" width="50" class="cursor-pointer" @click="redirectInstagram"/>
+    <img src="@/assets/images/whatsapp.png" width="50" class="cursor-pointer" @click="redirectWhatsapp"/>
   </div>
 
   <Navbar v-if="showNavbar"/>
@@ -33,6 +33,11 @@ export default {
   methods: {
     confirm(title, message, options = {}) {
       return this.$refs.confirmDialog.open(title, message, options);
+    },
+
+    redirectInstagram() {
+      const url = `https://www.instagram.com/horusfaculdadespzo/`;
+      window.open(url, '_blank');
     },
 
     redirectWhatsapp() {

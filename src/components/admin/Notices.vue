@@ -10,7 +10,7 @@
 
     <div class="col-span-1 bg-gray-100 p-4">
       <div v-for="(notices, course) in noticesGroupedByCourse" :key="course" class="mb-6">
-        <h3 class="font-bold text-lg mb-2">{{ course }}</h3>
+        <h3 class="font-bold text-lg mb-2">{{ course !== 'null' ? course : 'Horus' }}</h3>
           <div v-for="notice in notices" :key="notice.id" class="mb-2">
             <li @click="selectNotice(notice)" class="hover:bg-gray-200 cursor-pointer">
               {{ notice.title }}
